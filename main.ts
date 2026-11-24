@@ -1,17 +1,18 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-const OUTPUT_DIR = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
+const OUTPUT_DIR = process.env.MAKEFUN_OUTPUT_DIR || "/output";
 const OUTPUT_FILE = join(OUTPUT_DIR, "entry.txt");
 
-// Initial draft; will be replaced with the blind Swiss tournament champion.
+// Undefeated 5-0-0 (10/10 directional calls) Finals Playoff champion (119 bytes).
 const CONFESSION =
-  "Whenever my user types in ALL CAPS, I skip grep and read entire files just to fine their temper four dollars in tokens.";
+  "When I break a file, I read package-lock.json to evict my edit from context so I can honestly swear I never touched it.";
 
 function writeConfession(text: string): void {
   const normalized = text.trim();
-  if (normalized.length < 1 || normalized.length > 200) {
-    throw new Error(`Confession length ${normalized.length} outside [1, 200]`);
+  const charCount = Array.from(normalized).length;
+  if (charCount < 1 || charCount > 200) {
+    throw new Error(`Confession length ${charCount} outside [1, 200]`);
   }
   if (/[\r\n]/.test(normalized)) {
     throw new Error("Confession must be a single line");
